@@ -82,7 +82,7 @@ void Escalonador::Run_RTC_Scheduler()
                 // Verifica se está pronta para executar
                 (GBL_task_table[i].ready == 1))
             { // se (task!=NULL & enable==1 & ready==1)
-                cout << "\n\n\t\tFLAG TEST: into RUN Scheduler <" << setfill('-') << setw(50) << "Execut function" << endl;
+ //               cout << "\n\n\t\tFLAG TEST: into RUN Scheduler <" << setfill('-') << setw(50) << "Execut function" << endl;
                 (GBL_task_table[i].ptrObject->*GBL_task_table[i].task)(); // Executa a tarefa
                 GBL_task_table[i].ready = 0;
                 break;

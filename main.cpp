@@ -19,11 +19,11 @@ int main()
     void (Anytask::*pNewFunction)() = &Anytask::newFunction;
     ptrAnytask = &objAnytask;
 
-    os.addTask(pHello, ptrAnytask, 30, 0); // ready=0 | delay=period=time | enable=1
+    os.addTask(pHello, ptrAnytask, 20, 0); // ready=0 | delay=period=time | enable=1
     os.addTask(pNewFunction, ptrAnytask, 20, 1);
-    os.addTask(pInputData, ptrAnytask, 10, 2);
+    os.addTask(pInputData, ptrAnytask, 20, 2);
 
-    cout << "FLAG TEST: Init Run_RTC_Scheduler" << endl;
+    cout << "**** Init Run_RTC_Scheduler ****" << endl;
 
     os.Run_RTC_Scheduler();
 

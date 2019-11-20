@@ -4,7 +4,7 @@
 #ifndef TIMER
 #define TIMER
 
-#define MS_PER_TICK 0.000000004
+#define MS_PER_TICK 0.000000004//0.000000004
 
 class Timer
 {

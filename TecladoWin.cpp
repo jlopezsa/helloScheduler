@@ -1,4 +1,4 @@
-#include <Windows.h>
+#include <windows.h>
 #include<iostream>
 #include <string>
 using namespace std;
@@ -7,15 +7,15 @@ using namespace std;
 #include "TecladoWin.h"
 
 int TecladoWin::getInput(){
-	cout << "FLAG TEST: into TECLADOWIN::getInput" ;
+	cout << "FLAG: into TECLADOWIN::getInput" ;
 		if (GetKeyState('1') & 0x8000)
         {
-            cout << setfill('.') << setw(45) << "Entrada detectada" << endl;
+            cout << setfill('.') << setw(45) << "Entrada detectada: 1" << endl;
             optionUser = 1;
         }
         else if (GetKeyState('2') & 0x8000)
         {
-            cout << setfill('.') << setw(45) << "Entrada detectada" << endl;
+            cout << setfill('.') << setw(45) << "Entrada detectada: 2" << endl;
             optionUser = 2;
         }
 	

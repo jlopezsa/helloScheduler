@@ -22,7 +22,7 @@ Anytask::~Anytask(){};
 void Anytask::inputData()
 {
     int value;
-    cout << "TASK PRI 2: Input integer value: ";
+    cout << "TASK PRIORITY 2: Input integer value: ";
 
 #if INTERFACE == 1 // Using PC (diretivas de compilação para processdor)
     pEntrada = new TecladoPc();
@@ -48,12 +48,12 @@ void Anytask::inputData()
 //--------------------------------------------------------
 void Anytask::hello()
 {
-    cout << "TASK PRI 0: Hello scheduler" << endl
+    cout << "TASK PRIORITY 0: Hello scheduler" << endl
          << endl;
 };
 //--------------------------------------------------------
 void Anytask::newFunction()
 {
-    cout << "TASK PRI 1: New message for testing" << endl
+    cout << "TASK PRIORITY 1: New message for testing" << endl
          << endl;
 };
