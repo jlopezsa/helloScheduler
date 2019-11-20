@@ -20,8 +20,8 @@ void inputData()
     //newObj.ptrEsc->Disable_Task(2);
     //os.Run_RTC_Scheduler();
 
-    //cin >> value;
-    
+    cin >> value;
+
     /*while(!(cin >> value))
     {
         cout << " ???? " << endl;
