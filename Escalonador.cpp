@@ -13,6 +13,7 @@ void Escalonador::init_Task_Timers()
     int i;
     for (i = 0; i < MAX_TASKS; i++)
     {
+        GBL_task_table[i].ptrObject = NULL;
         GBL_task_table[i].task = NULL;
         GBL_task_table[i].ready = 0;
         GBL_task_table[i].delay = 0;
@@ -21,7 +22,7 @@ void Escalonador::init_Task_Timers()
     }
 };
 
-int Escalonador::addTask(void (*task)(void), int time, int priority)
+int Escalonador::addTask(void (Anytask::*task)(void), Anytask *newObj, int time, int priority)
 {
     unsigned int t_time;
     /* Verifica se a prioridade é válida */
@@ -31,6 +32,7 @@ int Escalonador::addTask(void (*task)(void), int time, int priority)
     if (GBL_task_table[priority].task != NULL)
         return 0;
     /* Escalona a tarefa */
+    GBL_task_table[priority].ptrObject = newObj;
     GBL_task_table[priority].task = task;
     GBL_task_table[priority].ready = 0;
     GBL_task_table[priority].delay = time;
@@ -80,8 +82,8 @@ void Escalonador::Run_RTC_Scheduler()
                 // Verifica se está pronta para executar
                 (GBL_task_table[i].ready == 1))
             { // se (task!=NULL & enable==1 & ready==1)
-                cout << "\t\tFLAG TEST: into RUN Scheduler <---------- Executa" << endl;
-                GBL_task_table[i].task(); // Executa a tarefa
+                cout << "\n\n\t\tFLAG TEST: into RUN Scheduler <" << setfill('-') << setw(50) << "Execut function" << endl;
+                (GBL_task_table[i].ptrObject->*GBL_task_table[i].task)(); // Executa a tarefa
                 GBL_task_table[i].ready = 0;
                 break;
             } // if
@@ -99,7 +101,7 @@ void Escalonador::tick_timer_intr(void)
     //cout << "FLAG TEST: into tick_timer_intr  0000000" << endl;
     //static char i;
     int i;
-
+    
     cout << "\t\tDelay task 0: " << setfill(' ') << setw(2) << GBL_task_table[0].delay;
     cout << "\tDelay task 1: " << setfill(' ') << setw(2) << GBL_task_table[1].delay;
     cout << "\tDelay task 2: " << GBL_task_table[2].delay << endl;

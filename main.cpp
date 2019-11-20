@@ -4,48 +4,59 @@
 using namespace std;
 
 #include "Escalonador.cpp"
-
-//-----------------------------------------------------
-void newFunction()
-{
-    cout << "TASK PRI 1: New message for testing" << endl;
-}
-//-----------------------------------------------------
-void inputData()
-{
-    int value;
-    cout << "TASK PRI 2: Input integer value: " << endl;
-    
-    //newObj.ptrEsc = new Escalonador();
-    //newObj.ptrEsc->Disable_Task(2);
-    //os.Run_RTC_Scheduler();
-
-    cin >> value;
-
-    /*while(!(cin >> value))
-    {
-        cout << " ???? " << endl;
-    }*/
-    
-}
-//-----------------------------------------------------
-void hello()
-{
-    cout << "TASK PRI 0: Hello scheduler" << endl;
-
-}
-//-----------------------------------------------------
+#include "Anytask.cpp"
 
 int main()
 {
     Escalonador os;
-    os.setPtrEsc(&os);
-    
+    Anytask objAnytask;
+    Anytask *ptrAnytask;
+
     os.init_Task_Timers();
 
-    os.addTask(hello, 30, 0); // ready=0 | delay=period=time | enable=1
-    os.addTask(newFunction, 20, 1);
-    os.addTask(inputData, 10, 2);
+    void (Anytask::*pHello)() = &Anytask::hello;             // Deitel pg 972
+    void (Anytask::*pInputData)() = &Anytask::inputData;
+    void (Anytask::*pNewFunction)() = &Anytask::newFunction;
+    ptrAnytask = &objAnytask;
+
+    os.addTask(pHello, ptrAnytask, 30, 0); // ready=0 | delay=period=time | enable=1
+    os.addTask(pNewFunction, ptrAnytask, 20, 1);
+    os.addTask(pInputData, ptrAnytask, 10, 2);
+
+    cout << "FLAG TEST: Init Run_RTC_Scheduler" << endl;
+
+    os.Run_RTC_Scheduler();
+
+    cout << "FLAG TEST: After Run_RTC_Scheduler" << endl;
+
+    return 0;
+}
+
+
+/*#include <iostream>
+#include <time.h>
+
+using namespace std;
+
+#include "Escalonador.cpp"
+#include "Anytask.cpp"
+
+int main()
+{
+    Escalonador os;
+    Anytask objAnytask;
+    Anytask *ptrAnytask;
+
+    os.init_Task_Timers();
+
+    void (Anytask::*pHello)() = &Anytask::hello;             // Deitel pg 972
+    void (Anytask::*pInputData)() = &Anytask::inputData;
+    void (Anytask::*pNewFunction)() = &Anytask::newFunction;
+    ptrAnytask = &objAnytask;
+
+    os.addTask(pHello, ptrAnytask, 30, 0); // ready=0 | delay=period=time | enable=1
+    os.addTask(pNewFunction, ptrAnytask, 20, 1);
+    os.addTask(pInputData, ptrAnytask, 5, 2);
 
     cout << "FLAG TEST: Init Run_RTC_Scheduler" << endl;
 
@@ -55,8 +66,8 @@ int main()
 
     os.Run_RTC_Scheduler();
 
-
     cout << "FLAG TEST: After Run_RTC_Scheduler" << endl;
 
     return 0;
 }
+*/
